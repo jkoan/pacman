@@ -44,7 +44,7 @@ void Screen::cleanUpInstance() {
 
 Screen::Screen():
 	sdlInitErrorOccured(false),
-	fullscreen(CommandLineOptions::exists("f","fullscreen")),
+	fullscreen(CommandLineOptions::exists("w","window")),
 	rect_num(0),
 	scalingFactor(1)
 {

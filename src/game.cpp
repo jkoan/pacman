@@ -127,7 +127,7 @@ bool Game::eventloop() {
 				if(!Pacman::getInstance()->is_dying()) {
 					togglePause();
 				}
-			} else if((event.key.keysym.sym == SDLK_q)||(event.key.keysym.sym == SDLK_ESCAPE)) {
+			} else if((event.key.keysym.sym == SDLK_ESCAPE)) {
 				return false;
 			}
 			break;

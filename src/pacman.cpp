@@ -10,7 +10,7 @@ int main(int argc, char *argv[]) {
 		          << std::endl
 		          << "Options:"                                                              << std::endl
 		          << "  -h, --help         Display this help message and quit."              << std::endl
-		          << "  -f, --fullscreen   Start the game in fullscreen mode."               << std::endl
+		          << "  -w, --window       Start the game in window mode."               << std::endl
 		          << "  --noscaling        Do not try to scale the game in fullscreen mode." << std::endl
 		          << "  --nocentering      Do not center the game in fullscreen mode."       << std::endl
 		          << "  -s, --nosound      Start with sound switched off."                   << std::endl
@@ -30,23 +30,7 @@ int main(int argc, char *argv[]) {
 	if(Screen::getInstance()->hasSDLInitErrorOccured())
 		return EXIT_FAILURE;
 
-	while(MenuMain::getInstance()->show()) {
-		Game::getInstance()->start();
-		if (Game::getInstance()->isGameOver()) {
-			// do not load() here, this has been done at the time the game was over
-			if (!HighscoreList::getInstance()->isReadonly()) {
-				HighscoreList::getInstance()->show(true, true);  // player name alterable, last entry highlighted
-				if (HighscoreList::getInstance()->getIdxLastInsertedEntry() >= 0) {
-					HighscoreEntry *entry = HighscoreList::getInstance()->getEntry(HighscoreList::getInstance()->getIdxLastInsertedEntry());
-					entry = new HighscoreEntry(std::string(entry->getPlayerName()), entry->getScore(), entry->getLevel());
-					HighscoreList::getInstance()->load();
-					HighscoreList::getInstance()->insertEntry(entry);
-					HighscoreList::getInstance()->save();
-				}
-				HighscoreList::getInstance()->show(false, true);
-			}
-		}
-	}
+	Game::getInstance()->start();
 
 	Game::cleanUpInstance();
 	MenuMain::cleanUpInstance();
